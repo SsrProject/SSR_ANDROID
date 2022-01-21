@@ -5,6 +5,21 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
 class UserRemoteRepository: UserRepository {
+    override fun postFile(file : ImgFile ) : Single<Boolean> {
+        return HttpClient.client
+            .create(MainService::class.java)
+            .postFile(file)
+            .subscribeOn(Schedulers.io())
+            .map {
+                it.success
+            }
+            .onErrorReturn {
+                    error ->
+                Log.d("error", error.toString())
+                false
+            }
+    }
+
     override fun postTotal(farmIssue: FarmIssue): Single<Boolean> {
         return HttpClient.client
             .create(MainService::class.java)
