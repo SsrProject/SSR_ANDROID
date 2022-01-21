@@ -13,8 +13,6 @@ class MainViewModel: ViewModel() {
     private val userRepository = UserRemoteRepository.getInstance()
     private val disposables = CompositeDisposable()
 
-    val Api = Retrofit.api
-
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
 
     fun postTotal() {

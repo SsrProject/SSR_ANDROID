@@ -39,9 +39,7 @@ class MainActivity : AppCompatActivity() {
             openSomeActivityForResult()
         }
     }
-    //파일생성 함수 불러오기 + 파일에다가 uri 넣기
-    //나는 이미 uri를 선언햇어서 전역변수로 uri선언하고 거기다가 받은 uri 넣어서 fileProvider하면 될뜻
-    fun testFile(){
+    private fun makeFile(){
         val photoFile : File? = try{
             createImageFile()
         }catch (ex: IOException){
@@ -60,10 +58,9 @@ class MainActivity : AppCompatActivity() {
         val storageDir : File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile("JPEG_${timestamp}_", ".jpg", storageDir)
             .apply { curPhotoPath = absolutePath }
-    }//외부 파일 생성
+    }
 
 
-    //rx
     private fun observeEvent() {
         viewModel.itemEventRelay
             .ofType(MainViewModel.AddSuccessEvent::class.java)
@@ -80,7 +77,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    //갤러리
     private val resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -88,7 +84,7 @@ class MainActivity : AppCompatActivity() {
                 if (uri != null) {
                     ImgUri = uri
                 }
-                testFile()
+                makeFile()
                 binding.image.setImageURI(ImgUri)
             }
         }
