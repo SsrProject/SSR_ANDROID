@@ -3,9 +3,10 @@ package com.ssr_android.repository
 import android.util.Log
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import java.io.File
 
 class UserRemoteRepository: UserRepository {
-    override fun postFile(file : ImgFile ) : Single<Boolean> {
+    override fun postFile(file : File ) : Single<Boolean> {
         return HttpClient.client
             .create(MainService::class.java)
             .postFile(file)
