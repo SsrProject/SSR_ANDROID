@@ -2,9 +2,8 @@ package com.ssr_android.network
 
 import com.ssr_android.network.response.DefaultResponse
 import io.reactivex.Single
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
+import java.io.File
 
 interface MainService {
 
@@ -13,12 +12,13 @@ interface MainService {
         @Body farmIssue: FarmIssue
     ): Single<DefaultResponse>
 
+    @Multipart
     @POST(baseUrl)
-    fun postImg(
+    fun postFile(
+        @Part file : File
+    ): Single<DefaultResponse>
 
-    )
     @GET(baseUrl)
     fun getUrl(
-
     )
 }
