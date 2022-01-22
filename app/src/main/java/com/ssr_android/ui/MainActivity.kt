@@ -45,6 +45,9 @@ class MainActivity : AppCompatActivity() {
         }catch (ex: IOException){
             null
         }
+        if (photoFile != null) {
+            ImgFile.imgFile = photoFile
+        }
         photoFile?.also {
             ImgUri = FileProvider.getUriForFile(
                 this ,
@@ -74,7 +77,6 @@ class MainActivity : AppCompatActivity() {
         disposable.dispose()
         super.onDestroy()
     }
-
 
 
     private val resultLauncher =

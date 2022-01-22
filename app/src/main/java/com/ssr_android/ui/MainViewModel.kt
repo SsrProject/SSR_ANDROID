@@ -15,6 +15,15 @@ class MainViewModel: ViewModel() {
 
     val itemEventRelay: Relay<RxAction> = PublishRelay.create()
 
+    fun postFile() {
+        userRepository.postFile(ImgFile.imgFile
+        )
+            .subscribe {result ->
+                itemEventRelay.accept(AddSuccessEvent(result))
+            }
+            .addTo(disposables)
+    }
+
     fun postTotal() {
         userRepository.postTotal(
             FarmIssue(
